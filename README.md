@@ -1,8 +1,7 @@
 <p align="center">
-  <img src="public/logo.png" width="80" alt="Netrix Logo" />
+  <img src="public/logo.png" width="200" alt="Netrix Logo" />
 </p>
 
-<h1 align="center">Netrix</h1>
 <p align="center">
   <strong>Network Detection & Response (NDR)</strong><br/>
   Plataforma de monitoramento de rede, detecção de ameaças e resposta a incidentes em tempo real.
