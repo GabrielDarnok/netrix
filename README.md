@@ -1,5 +1,5 @@
 <p align="center">
-  <img src="public/netrix-logo.svg" width="80" alt="Netrix Logo" />
+  <img src="public/logo.png" width="80" alt="Netrix Logo" />
 </p>
 
 <h1 align="center">Netrix</h1>
