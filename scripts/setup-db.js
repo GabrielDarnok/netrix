@@ -57,14 +57,22 @@ async function run() {
     console.log("🔧 [4/4] Creating default admin user...");
     const res = await client.query("SELECT id FROM users WHERE email = 'admin@netrix.com'");
     if (res.rows.length === 0) {
-      const hashed = hashPassword('admin');
+      const adminPassword = process.env.ADMIN_INITIAL_PASSWORD || crypto.randomBytes(8).toString('hex');
+      const hashed = hashPassword(adminPassword);
       await client.query(
         "INSERT INTO users (name, email, password_hash) VALUES ($1, $2, $3)",
         ['Administrador', 'admin@netrix.com', hashed]
       );
-      console.log("   ✅ Admin user created (admin@netrix.com / admin)");
+      console.log("\n   ╔══════════════════════════════════════════════════════════════╗");
+      console.log("   ║                 🔑 ADMIN CREDENTIALS CREATED                 ║");
+      console.log("   ╠══════════════════════════════════════════════════════════════╣");
+      console.log("   ║  Email:    admin@netrix.com                                  ║");
+      console.log(`   ║  Password: ${adminPassword.padEnd(46)}║`);
+      console.log("   ╠══════════════════════════════════════════════════════════════╣");
+      console.log("   ║  ⚠️  Save these credentials! Change after initial login.      ║");
+      console.log("   ╚══════════════════════════════════════════════════════════════╝\n");
     } else {
-      console.log("   ℹ️  Admin user already exists, skipping.");
+      console.log("   ℹ️  Admin user already exists, skipping creation.");
     }
 
     console.log("\n🎉 Setup finished successfully!");

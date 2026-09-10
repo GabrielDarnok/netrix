@@ -13,6 +13,7 @@
   <img src="https://img.shields.io/badge/PostgreSQL-16-blue?logo=postgresql" alt="PostgreSQL" />
   <img src="https://img.shields.io/badge/TypeScript-5-blue?logo=typescript" alt="TypeScript" />
   <img src="https://img.shields.io/badge/TailwindCSS-4-blue?logo=tailwindcss" alt="Tailwind" />
+  <img src="https://img.shields.io/badge/License-MIT-green.svg" alt="License: MIT" />
 </p>
 
 ---
@@ -23,23 +24,30 @@ O **Netrix** é uma plataforma NDR (Network Detection & Response) que transforma
 
 ## ✨ Funcionalidades
 
-| Módulo | Descrição |
+- **Dashboard Executivo:** Métricas agregadas de bps, pps e fluxos em tempo real com gráficos comparativos
+- **Traffic Explorer:** Análise granular de conversações por IP de origem/destino, portas e protocolos (TCP/UDP/ICMP)
+- **Host Profiler:** Visão 360° de qualquer endereço IP (geolocalização via WHOIS, volume de tráfego, histórico e status)
+- **Detecção de Ameaças (NDR):**
+  - Identificação de Port Scanning horizontal e vertical
+  - Detecção de ataques volumétricos (SYN Flood, UDP Flood, ICMP Flood)
+  - Análise de picos anômalos de tráfego
+- **Central de Resposta a Incidentes:**
+  - Triagem e categorização de incidentes
+  - Ações de mitigação direta (Baseline/Ignorar ou Escalar)
+  - Notificações automáticas via Telegram Bot
+- **Hosted Services:** Detecção automática de serviços ativos na infraestrutura (HTTP, HTTPS, DNS, SSH, etc.)
+- **Multi-Tenant & RBAC:** Separação lógica por clientes/organizações com controle de acesso baseado em funções
+
+## 🛠️ Stack Tecnológica
+
+| Camada | Tecnologia |
 |---|---|
-| **Dashboard** | KPIs em tempo real (PPS, volume, saúde da rede), gráficos de série temporal contínua, feed de ameaças ao vivo |
-| **Hosts** | Inventário automático de hosts, perfil comportamental com baseline estatístico, detecção de desvios |
-| **Serviços** | Descoberta automática de serviços hospedados na rede (SSH, HTTP, DNS, etc.) com análise de risco |
-| **Segurança** | Motor NDR com 3 regras de detecção: anomalia de volume, flags TCP anômalas (SYN Flood, XMAS Scan) e dispersão (port scan) |
-| **Explorer** | Busca livre no tráfego por IP, protocolo, porta e período com gráficos interativos |
-| **Threat Intel** | Cruzamento automático com feeds de Threat Intelligence e AbuseIPDB |
-| **Alertas** | Workflow de resolução de incidentes com supressão temporária e integração com Telegram |
-| **Multi-tenant** | Suporte a múltiplas organizações com redes (CIDRs) segregadas |
-
-## 🛠 Stack Tecnológica
-
-- **Frontend:** Next.js 16 (App Router) · React 19 · TailwindCSS 4 · Recharts
-- **Backend:** Next.js Server Actions · PostgreSQL · NextAuth.js v5
-- **Coletor:** pmacct (NetFlow v5/v9, sFlow, IPFIX)
-- **Integrações:** Telegram Bot API · AbuseIPDB · WHOIS
+| **Framework** | Next.js 16 (App Router, Server Actions) |
+| **Frontend** | React 19, TailwindCSS 4, Recharts, Lucide Icons |
+| **Backend** | Node.js, PostgreSQL (`pg` connection pool) |
+| **Autenticação** | NextAuth.js v5 (Credentials Provider com `scrypt` hashing) |
+| **Coleta de Fluxos** | pmacct (NetFlow v5/v9, IPFIX, sFlow) |
+| **Linguagem** | TypeScript 5 (strict mode) |
 
 ## 📋 Pré-requisitos
 
@@ -61,7 +69,7 @@ npm install
 cp .env.example .env.local
 # Edite o .env.local com as credenciais do seu banco
 
-# 4. Execute o setup do banco de dados
+# 4. Execute o setup do banco de dados (cria as tabelas e o admin inicial)
 npm run setup
 
 # 5. Inicie o servidor de desenvolvimento
@@ -70,9 +78,9 @@ npm run dev
 
 Acesse [http://localhost:3000](http://localhost:3000) e faça login com:
 - **Email:** `admin@netrix.com`
-- **Senha:** `admin`
+- **Senha:** *(gerada aleatoriamente e exibida de forma segura no terminal durante o `npm run setup`)*
 
-> ⚠️ Troque a senha padrão imediatamente após o primeiro login.
+> 💡 Se preferir pré-definir a senha inicial do administrador, você pode declarar `ADMIN_INITIAL_PASSWORD=sua_senha` no seu `.env.local` antes de executar o `npm run setup`.
 
 ## ⚙️ Variáveis de Ambiente
 
@@ -84,6 +92,7 @@ Acesse [http://localhost:3000](http://localhost:3000) e faça login com:
 | `DB_NAME` | Nome do banco de dados (padrão: flowdb) | ✅ |
 | `DB_USER` | Usuário do PostgreSQL | ✅ |
 | `DB_PASS` | Senha do PostgreSQL | ✅ |
+| `ADMIN_INITIAL_PASSWORD` | Senha customizada para o primeiro admin (se omitida, gera aleatória) | |
 | `TELEGRAM_BOT_TOKEN` | Token do bot do Telegram para alertas | |
 
 ## 📁 Estrutura do Projeto
@@ -110,6 +119,7 @@ netrix/
 │       ├── utils/           # Utilitários (rede, senhas, análise de serviços)
 │       └── db.ts            # Pool de conexões PostgreSQL
 ├── .env.example             # Template de variáveis de ambiente
+├── LICENSE                  # Licença MIT
 └── package.json
 ```
 
@@ -122,4 +132,4 @@ netrix/
 
 ## 📄 Licença
 
-Este projeto não possui licença definida. Todos os direitos reservados.
+Distribuído sob a licença [MIT](LICENSE). Veja `LICENSE` para mais detalhes.

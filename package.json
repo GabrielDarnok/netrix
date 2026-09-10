@@ -2,6 +2,7 @@
   "name": "netrix",
   "version": "1.0.0",
   "description": "Network Detection & Response (NDR) platform — real-time traffic analysis, threat detection and incident response powered by NetFlow/sFlow.",
+  "license": "MIT",
   "scripts": {
     "dev": "next dev",
     "build": "next build",
