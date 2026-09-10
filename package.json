@@ -1,0 +1,36 @@
+{
+  "name": "netrix",
+  "version": "1.0.0",
+  "description": "Network Detection & Response (NDR) platform — real-time traffic analysis, threat detection and incident response powered by NetFlow/sFlow.",
+  "scripts": {
+    "dev": "next dev",
+    "build": "next build",
+    "start": "next start",
+    "lint": "eslint",
+    "setup": "node scripts/setup-db.js",
+    "check-schema": "node scripts/check-schema.js"
+  },
+  "dependencies": {
+    "bcryptjs": "^3.0.3",
+    "lucide-react": "^1.17.0",
+    "next": "16.2.6",
+    "next-auth": "^5.0.0-beta.31",
+    "pg": "^8.21.0",
+    "react": "19.2.4",
+    "react-dom": "19.2.4",
+    "recharts": "^3.8.1"
+  },
+  "devDependencies": {
+    "@tailwindcss/postcss": "^4",
+    "@types/bcryptjs": "^2.4.6",
+    "@types/node": "^20",
+    "@types/pg": "^8.20.0",
+    "@types/react": "^19",
+    "@types/react-dom": "^19",
+    "dotenv": "^16.4.7",
+    "eslint": "^9",
+    "eslint-config-next": "16.2.6",
+    "tailwindcss": "^4",
+    "typescript": "^5"
+  }
+}
